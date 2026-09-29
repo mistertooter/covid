@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How COVID-19 Affects the Body</title>
+<style>
+:root{--ink:#eef6ff;--muted:#a8bed0;--bg:#07131f;--panel:#102536;--cyan:#4be1d0;--blue:#70aaff;--pink:#ff668c;--gold:#ffd36a;--green:#87edbd}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 0%,#18384b 0,#07131f 55%,#050b12 100%);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh;display:grid;place-items:center;padding:20px}
+.poster{width:min(100%,720px);aspect-ratio:3/4;min-height:760px;max-height:1200px;position:relative;overflow:hidden;border:1px solid #35627a;border-radius:30px;background:linear-gradient(160deg,rgba(13,36,52,.96),rgba(6,17,28,.98));box-shadow:0 30px 100px #0009;display:flex;flex-direction:column;padding:clamp(20px,4vw,38px);isolation:isolate}
+.poster:before,.poster:after{content:"";position:absolute;border-radius:50%;filter:blur(3px);z-index:-1;pointer-events:none}
+.poster:before{width:380px;height:380px;background:#1e9bba14;top:15%;left:-35%}
+.poster:after{width:420px;height:420px;background:#da467b10;bottom:0;right:-30%}
+.eyebrow{color:var(--cyan);font-size:clamp(10px,1.6vw,13px);font-weight:800;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+.eyebrow:before{content:"";width:22px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+h1{font-size:clamp(30px,6vw,52px);line-height:.98;letter-spacing:-.045em;margin:13px 0 9px;max-width:540px}
+h1 span{color:var(--cyan)}
+.subtitle{margin:0;color:#b5cad8;font-size:clamp(12px,1.8vw,15px);line-height:1.5;max-width:550px}
+.scene{position:relative;flex:1;min-height:390px;margin:10px -8px 0;overflow:hidden;border-radius:22px;background:radial-gradient(ellipse at center,#1a3a4d 0,#10293a 43%,#0a1c2b 78%);border:1px solid #2b566c}
+.scene svg{width:100%;height:100%;display:block}
+.svg-label{font:700 12px system-ui;fill:#e9f7ff;letter-spacing:.04em}
+.svg-small{font:600 10px system-ui;fill:#a9c3d4}
+.callout{filter:drop-shadow(0 2px 6px #001)}
+.particle{animation:float 3s ease-in-out infinite}
+.p2{animation-delay:-1s}
+.p3{animation-delay:-2s}
+.virus{transform-box:fill-box;transform-origin:center;animation:turn 12s linear infinite}
+.airflow{stroke-dasharray:7 11;animation:dashes 2.5s linear infinite}
+.pulse{animation:pulse 2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.activeGlow{filter:drop-shadow(0 0 9px currentColor)}
+.story-line{stroke-dasharray:520;stroke-dashoffset:520;animation:draw 2.2s ease forwards}
+.phase{transition:opacity .45s ease,filter .45s ease}
+.phase.dim{opacity:.23;filter:saturate(.5)}
+@keyframes float{50%{transform:translate(4px,-8px)}}
+@keyframes turn{to{transform:rotate(360deg)}}
+@keyframes dashes{to{stroke-dashoffset:-72}}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.68}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.caption{position:absolute;left:18px;right:18px;bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#071521dc;border:1px solid #3c657a;border-radius:14px;padding:11px 14px;backdrop-filter:blur(9px)}
+.caption strong{display:block;font-size:clamp(12px,1.8vw,15px);color:#fff}
+.caption span{font-size:clamp(10px,1.45vw,12px);color:#a9c2d2}
+.stepnum{font-size:24px!important;font-weight:900;color:var(--cyan)!important;line-height:1}
+.controls{display:flex;align-items:center;gap:12px;margin:14px 0 11px}
+.play{border:0;color:#06141d;background:linear-gradient(135deg,#74f3db,#4bbdff);padding:11px 17px;border-radius:99px;font-weight:850;cursor:pointer;box-shadow:0 5px 18px #43cfdd40}
+.play:hover{transform:translateY(-1px)}
+.track{display:flex;gap:6px;flex:1}
+.track button{height:7px;border:0;border-radius:9px;background:#315064;flex:1;cursor:pointer;padding:0;transition:.3s}
+.track button.on{background:linear-gradient(90deg,var(--cyan),var(--blue));box-shadow:0 0 12px #4be1d077}
+.count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:40px;text-align:right}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.info-card{border-radius:14px;padding:11px 13px;background:#102636;border:1px solid #28495c;min-height:62px}
+.info-card b{font-size:11px;display:block;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;color:var(--cyan)}
+.info-card p{font-size:clamp(10px,1.4vw,12px);line-height:1.35;color:#bdd0dc;margin:0}
+.foot{font-size:9px;color:#7592a3;text-align:center;margin:10px 0 0;line-height:1.35}
+.source-toggle{align-self:center;border:1px solid #3a6174;background:#0d2432;color:#bde9f5;border-radius:9px;padding:7px 12px;margin-top:8px;font-size:11px;cursor:pointer}
+.source{display:none;position:fixed;z-index:5;inset:5vh 5vw;background:#07131f;border:1px solid #4be1d0;border-radius:18px;box-shadow:0 0 0 999px #000b;padding:16px;max-width:900px;margin:auto;overflow:auto}
+.source.open{display:block}
+.source header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.source pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#bcebdc;background:#061019;padding:14px;border-radius:10px;font-size:11px;line-height:1.45}
+.source button{background:#143044;color:white;border:1px solid #4a748a;padding:8px 11px;border-radius:8px;cursor:pointer}
+@media(max-width:500px){
+  body{padding:8px}
+  .poster{min-height:0;border-radius:20px;padding:18px;aspect-ratio:3/4}
+  .scene{min-height:0}
+  .info{gap:7px}
+  .info-card{padding:9px}
+  .caption{left:10px;right:10px;bottom:10px}
+  .controls{gap:8px}
+  .play{padding:9px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<main class="poster" aria-label="Animated educational graphic about COVID-19 infection and its effects on the body">
+  <div class="eyebrow">Inside the body · infection to recovery</div>
+  <h1>How COVID-19<br><span>affects the body</span></h1>
+  <p class="subtitle">A respiratory virus can enter through the airways, multiply in cells, and trigger an immune response. What happens next varies from person to person.</p>
+
+  <section class="scene" aria-label="Animated cutaway illustration of virus transmission and the body's response">
+    <svg viewBox="0 0 620 560" role="img" aria-labelledby="svgtitle svgdesc" preserveAspectRatio="xMidYMid meet">
+      <title id="svgtitle">COVID-19 infection pathway through the respiratory system</title>
+      <desc id="svgdesc">Airborne particles enter the nose and airways. Virus particles infect airway cells, and immune cells respond. Most infections stay mild, while some cause lung inflammation and breathing problems.</desc>
+
+      <defs>
+        <radialGradient id="lung" cx="48%" cy="42%">
+          <stop stop-color="#ff9aa7"/>
+          <stop offset=".68" stop-color="#e15d7c"/>
+          <stop offset="1" stop-color="#8f3158"/>
+        </radialGradient>
+        <linearGradient id="trachea" x2="0" y2="1">
+          <stop stop-color="#9ee8e8"/>
+          <stop offset="1" stop-color="#4ba0b4"/>
+        </linearGradient>
+        <linearGradient id="cell" x2="1" y2="1">
+          <stop stop-color="#ffd985"/>
+          <stop offset="1" stop-color="#f2776e"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge>
+            <feMergeNode in="b"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+          <path d="M0 0L8 4L0 8" fill="none" stroke="#58d9d1" stroke-width="1.5"/>
+        </marker>
+      </defs>
+
+      <!-- Airflow -->
+      <g opacity=".45">
+        <path class="airflow" d="M12 150C115 128 126 208 215 198" fill="none" stroke="#69dbea" stroke-width="2"/>
+        <path class="airflow" d="M2 177C90 166 128 231 209 217" fill="none" stroke="#4faaff" stroke-width="1.4"/>
+        <path class="airflow" d="M15 125C92 116 130 174 194 178" fill="none" stroke="#a5c8ff" stroke-width="1.2"/>
+      </g>
+
+      <!-- Torso and lungs -->
+      <g class="phase" data-phase="0">
+        <path d="M214 76Q234 44 274 45h79q43 0 59 36l28 66 27 58-41 18-43-79-4 177H204l-6-177-40 78-42-17 35-60z" fill="#a9c6d5" opacity=".08" stroke="#80aabd" stroke-width="2"/>
+        <path d="M269 47v46q0 12-13 18l-19 9q-18 8-17 30l9 62" fill="none" stroke="#f0c6ac" stroke-width="11" stroke-linecap="round"/>
+        <path d="M339 47v47q0 12 13 18l19 9q17 9 15 30l-7 51" fill="none" stroke="#f0c6ac" stroke-width="11" stroke-linecap="round"/>
+        <path d="M313 63v150" fill="none" stroke="url(#trachea)" stroke-width="25" stroke-linecap="round"/>
+        <path d="M313 177l-43 48m43-48 43 48m-43-12-59 67m59-67 58 67m-58-26-40 63m40-63 41 63" fill="none" stroke="#83d3d5" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M310 206c-25-29-71-32-91 8-21 42 4 108 34 128 20 13 39-2 56-15z" fill="url(#lung)" stroke="#ffb1b9" stroke-width="2"/>
+        <path d="M316 206c25-29 71-32 91 8 21 42-4 108-34 128-20 13-39-2-56-15z" fill="url(#lung)" stroke="#ffb1b9" stroke-width="2"/>
+        <g fill="#ffb7c1" opacity=".62">
+          <circle cx="263" cy="256" r="4"/>
+          <circle cx="289" cy="286" r="3"/>
+          <circle cx="354" cy="249" r="4"/>
+          <circle cx="340" cy="302" r="3"/>
+        </g>
+        <path d="M152 90h74" stroke="#73dae5"/>
+        <text x="18" y="83" class="svg-label">BREATHING IN</text>
+        <text x="18" y="101" class="svg-small">tiny respiratory particles</text>
+        <g class="particle">
+          <circle cx="69" cy="145" r="7" fill="#6ee5d1"/>
+          <circle cx="70" cy="145" r="12" fill="none" stroke="#6ee5d1" opacity=".4"/>
+        </g>
+        <g class="particle p2">
+          <circle cx="115" cy="181" r="5" fill="#ff778e"/>
+          <circle cx="115" cy="181" r="10" fill="none" stroke="#ff778e" opacity=".5"/>
+        </g>
+        <rect x="369" y="365" width="215" height="73" rx="12" fill="#0a1b28" stroke="#4f798e"/>
+        <text x="386" y="389" class="svg-label">AIRWAYS &amp; LUNGS</text>
+        <text x="386" y="409" class="svg-small">The main sites of infection</text>
+        <text x="386" y="425" class="svg-small">and inflammation.</text>
+        <path d="M356 325C385 348 393 354 410 364" fill="none" stroke="#67d9d3" marker-end="url(#arrow)"/>
+      </g>
+
+      <!-- Airway cell close-up -->
+      <g class="phase dim" data-phase="1" transform="translate(30 370)">
+        <rect x="0" y="0" width="260" height="150" rx="18" fill="#132c3b" stroke="#467286"/>
+        <text x="16" y="24" class="svg-label">ZOOM IN · AIRWAY CELL</text>
+        <circle cx="126" cy="90" r="48" fill="url(#cell)" stroke="#ffe4a0" stroke-width="3"/>
+        <circle cx="128" cy="91" r="17" fill="#994d75" opacity=".72"/>
+        <circle cx="125" cy="87" r="6" fill="#ffcb79"/>
+        <g class="virus" transform="translate(83 83)">
+          <circle r="13" fill="#ff5d82" stroke="#ffb0bf" stroke-width="2"/>
+          <g stroke="#ff7b98" stroke-width="3" stroke-linecap="round">
+            <path d="M0-13v-9M9-9l7-7M13 0h9M9 9l7 7M0 13v9M-9 9l-7 7M-13 0h-9M-9-9l-7-7"/>
+          </g>
+        </g>
+        <path d="M194 69h47" stroke="#fb8b9b" marker-end="url(#arrow)"/>
+        <text x="198" y="59" class="svg-small">entry</text>
+      </g>
+
+      <!-- Stage details -->
+      <g class="phase dim" data-phase="1">
+        <circle class="virus" cx="203" cy="270" r="8" fill="#ff6382" filter="url(#glow)"/>
+        <g stroke="#ff849b" stroke-width="2">
+          <path d="M203 257v-5m9 10 4-4m0 12h6m-19 9v5m-9-10-4 4m0-12h-6"/>
+        </g>
+        <text x="25" y="330" class="svg-small">1 · VIRUS REACHES AIRWAY CELLS</text>
+      </g>
+
+      <g class="phase dim" data-phase="2">
+        <circle class="pulse" cx="317" cy="283" r="46" fill="none" stroke="#ffd36a" stroke-width="2" opacity=".6"/>
+        <circle class="pulse" cx="317" cy="283" r="60" fill="none" stroke="#ffd36a" opacity=".3"/>
+        <text x="328" y="348" class="svg-small">2 · IMMUNE RESPONSE</text>
+        <g class="particle">
+          <circle cx="264" cy="223" r="8" fill="#73e7c6"/>
+          <circle cx="264" cy="223" r="14" fill="none" stroke="#73e7c6" opacity=".5"/>
+        </g>
+        <g class="particle p3">
+          <circle cx="369" cy="270" r="7" fill="#73e7c6"/>
+          <circle cx="369" cy="270" r="13" fill="none" stroke="#73e7c6" opacity=".5"/>
+        </g>
+      </g>
+
+      <g class="phase dim" data-phase="3">
+        <path d="M422 214q18-18 35 0t35 0" fill="none" stroke="#ff837f" stroke-width="3" class="pulse"/>
+        <circle cx="483" cy="239" r="12" fill="#ff997f" opacity=".7"/>
+        <circle cx="514" cy="268" r="8" fill="#ffa67d" opacity=".7"/>
+        <text x="433" y="304" class="svg-small">3 · INFLAMMATION</text>
+        <rect x="365" y="450" width="220" height="55" rx="12" fill="#321f30" stroke="#a95065"/>
+        <text x="381" y="473" class="svg-label" fill="#ffb0a2">SEVERE CASES</text>
+        <text x="381" y="491" class="svg-small">can affect oxygen exchange</text>
+      </g>
+
+      <path class="story-line" d="M66 535H548" fill="none" stroke="#4be1d0" stroke-width="2" opacity=".75"/>
+      <circle cx="66" cy="535" r="4" fill="#4be1d0"/>
+      <circle cx="548" cy="535" r="4" fill="#4be1d0"/>
+    </svg>
+
+    <div class="caption">
+      <div>
+        <strong id="stageTitle">1 · Exposure</strong>
+        <span id="stageText">Infectious particles can be inhaled, especially in shared indoor air.</span>
+      </div>
+      <span class="stepnum" id="stageNum">01</span>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button class="play" id="playBtn" aria-label="Pause animation">Ⅱ Pause</button>
+    <div class="track" aria-label="Choose animation stage">
+      <button class="on" aria-label="Stage 1: Exposure"></button>
+      <button aria-label="Stage 2: Cell infection"></button>
+      <button aria-label="Stage 3: Immune response"></button>
+      <button aria-label="Stage 4: Lung effects"></button>
+    </div>
+    <span class="count" id="count">1 / 4</span>
+  </div>
+
+  <div class="info">
+    <div class="info-card">
+      <b>What the virus does</b>
+      <p>It enters some airway cells and uses them to make copies. The immune system then works to control the infection.</p>
+    </div>
+    <div class="info-card">
+      <b>Why symptoms vary</b>
+      <p>Age, health, immunity, and the infection itself all matter. Many people have mild illness; some develop serious lung or whole-body effects.</p>
+    </div>
+  </div>
+
+  <p class="foot">Educational illustration, not to scale. COVID-19 severity and symptoms differ between people. For personal medical advice, contact a healthcare professional.</p>
+  <button class="source-toggle" id="sourceToggle">View HTML / CSS / JavaScript source</button>
+</main>
+
+<div class="source" id="source">
+  <header><b>Complete single-file source</b><button id="closeSource">Close</button></header>
+  <pre id="sourceCode">Loading source…</pre>
+</div>
+
+<script>
+const stages = [
+  { title: "1 · Exposure", text: "Infectious particles can be inhaled, especially in shared indoor air." },
+  { title: "2 · Cell infection", text: "The virus enters susceptible airway cells and uses them to make copies." },
+  { title: "3 · Immune response", text: "Immune defenses recognize the infection. This response can cause fever, aches, and fatigue." },
+  { title: "4 · Lung effects", text: "Many recover. In some people, inflammation can make breathing and oxygen exchange difficult." }
+];
+
+let current = 0;
+let playing = true;
+let timer;
+
+const dots = [...document.querySelectorAll(".track button")];
+const groups = [...document.querySelectorAll(".phase[data-phase]")];
+
+function showStage(n) {
+  current = (n + stages.length) % stages.length;
+
+  document.getElementById("stageTitle").textContent = stages[current].title;
+  document.getElementById("stageText").textContent = stages[current].text;
+  document.getElementById("stageNum").textContent =
+    String(current + 1).padStart(2, "0");
+  document.getElementById("count").textContent =
+    `${current + 1} / ${stages.length}`;
+
+  dots.forEach((dot, i) => dot.classList.toggle("on", i === current));
+  groups.forEach(group =>
+    group.classList.toggle("dim", Number(group.dataset.phase) !== current)
+  );
+}
+
+function play() {
+  clearInterval(timer);
+  playing = true;
+
+  const button = document.getElementById("playBtn");
+  button.textContent = "Ⅱ Pause";
+  button.setAttribute("aria-label", "Pause animation");
+
+  timer = setInterval(() => showStage(current + 1), 4400);
+}
+
+function pause() {
+  clearInterval(timer);
+  playing = false;
+
+  const button = document.getElementById("playBtn");
+  button.textContent = "▶ Play";
+  button.setAttribute("aria-label", "Play animation");
+}
+
+dots.forEach((dot, i) => {
+  dot.addEventListener("click", () => {
+    showStage(i);
+    if (playing) play();
+  });
+});
+
+document.getElementById("playBtn").addEventListener("click", () => {
+  playing ? pause() : play();
+});
+
+const source = document.getElementById("source");
+
+document.getElementById("sourceToggle").addEventListener("click", () => {
+  document.getElementById("sourceCode").textContent =
+    "<!doctype html>\n" + document.documentElement.outerHTML;
+  source.classList.add("open");
+});
+
+document.getElementById("closeSource").addEventListener("click", () => {
+  source.classList.remove("open");
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") source.classList.remove("open");
+});
+
+showStage(0);
+play();
+</script>
+</body>
+</html>
